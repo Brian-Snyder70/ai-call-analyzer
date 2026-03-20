@@ -1,0 +1,18 @@
+{
+  "summary": "Caller reached the sales line trying to contact a specific person, BB. The sales rep screened the call, declined to transfer directly, suggested email, and provided minimal information. The caller pivoted to asking discovery questions about the company\u2019s sales methodology and tech stack but gained little useful insight before ending the call.",
+  "customer_intent": "Reach BB or, if blocked, gather useful qualification information from the employee answering the sales line.",
+  "sentiment": "Neutral to mildly negative",
+  "qa_observations": [
+    "The agent answered promptly and attempted basic call screening by asking who was calling and the reason for the call.",
+    "The agent did not offer a transfer, directory assistance, or additional help beyond suggesting email.",
+    "The caller adjusted strategy appropriately after being blocked, attempting to gather business intelligence from the contact.",
+    "The interaction remained polite, but the contact appeared disengaged and eager to end the conversation, limiting discovery."
+  ],
+  "coaching_suggestions": [
+    "When blocked from reaching the target, pivot faster to concise, specific discovery questions that are easier for the contact to answer.",
+    "Use a clearer value statement early to improve credibility and reduce resistance from internal screeners.",
+    "For internal call handling, agents could be coached to offer a more helpful next step, such as confirming role alignment or directing to a general mailbox if direct transfer is not possible.",
+    "Ask narrower environmental questions tied to common tools or workflows to increase the chance of uncovering actionable information."
+  ],
+  "retention_risk": "low"
+}

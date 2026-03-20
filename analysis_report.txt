@@ -1,0 +1,25 @@
+1. **Short summary**  
+Customer called about a higher bill and wants to know the reason. The agent acknowledged the issue and began checking the account. The customer also indicated they may change plans if the increase continues.
+
+2. **Customer intent**  
+- Understand why the monthly bill increased  
+- Evaluate whether a plan change may be needed if billing remains higher
+
+3. **Sentiment**  
+- **Customer sentiment:** Concerned, mildly frustrated, cost-sensitive  
+- **Agent sentiment:** Neutral, professional
+
+4. **QA observations**  
+- Agent opened the call politely and appropriately  
+- Agent acknowledged the issue and moved to investigate  
+- Agent did not yet show empathy for the billing concern  
+- Agent did not clarify details such as amount of increase, billing cycle, or recent account changes  
+- Agent did not reassure the customer that they would review the cause and possible options  
+- No resolution was provided in the transcript snippet
+
+5. **Coaching suggestions for the agent**  
+- Add empathy early: “I understand unexpected bill increases can be frustrating.”  
+- Ask targeted probing questions: amount of increase, when it started, any recent service or usage changes  
+- Set expectations: explain what you are checking and how long it will take  
+- Reassure the customer that you will review both the cause and any plan options if needed  
+- If the customer mentions leaving or changing plans, treat it as a retention cue and explore suitable alternatives proactively
