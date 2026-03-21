@@ -8,15 +8,18 @@ import json
 
 from main import transcribe_audio, analyze_transcript
 
+BASE_DIR = Path(__file__).resolve().parent
+STATIC_DIR = BASE_DIR / "static"
+
 app = FastAPI(title="AI Call Analyzer UI")
 
 # Serve static files like CSS/JS
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 
 @app.get("/")
 def root():
-    return FileResponse("static/index.html")
+    return FileResponse(str(STATIC_DIR / "index.html"))
 
 
 @app.get("/health")
