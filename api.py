@@ -8,15 +8,18 @@ import json
 
 from main import transcribe_audio, analyze_transcript
 
+BASE_DIR = Path(__file__).resolve().parent
+STATIC_DIR = BASE_DIR / "static"
+
 app = FastAPI(title="AI Call Analyzer UI")
 
 # Serve static files like CSS/JS
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 
 @app.get("/")
 def root():
-    return FileResponse("static/index.html")
+    return FileResponse(str(STATIC_DIR / "index.html"))
 
 
 @app.get("/health")
@@ -49,6 +52,7 @@ async def analyze_audio(file: UploadFile = File(...)):
         raise HTTPException(status_code=400, detail="No file uploaded")
 
     ext = Path(file.filename).suffix.lower()
+
     if ext not in [".wav", ".mp3", ".m4a", ".webm"]:
         raise HTTPException(status_code=400, detail="Unsupported audio file type")
 
