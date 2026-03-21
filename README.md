@@ -82,7 +82,8 @@ This project demonstrates how modern AI can:
 
 ## 👤 Author
 
-Brian Snyder  
+Brian Snyder
+🔗 LinkedIn: https://linkedin.com/in/brian-w-snyder
 Voice Implementation / Contact Center Technology  
 Exploring AI-driven CX solutions  
 
