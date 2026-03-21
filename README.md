@@ -1,69 +1,93 @@
-# AI Call Analyzer
+# 🎧 AI Call Analyzer – Contact Center Intelligence Platform
 
-FastAPI-based demo that transcribes or ingests call transcripts, sends them to OpenAI for QA scoring, and renders structured insights in a single-page UI.
+🚀 Live Demo: https://ai-call-analyzer-cj4s.onrender.com/
 
-## Features
+---
 
-- Upload audio (`.wav`, `.mp3`, `.m4a`, `.webm`) or paste/pull text transcripts
-- Whisper (GPT-4o mini) transcription + structured JSON analysis via the Responses API
-- Downloadable JSON report plus quick-glance metrics (intent, sentiment, QA score, disposition, etc.)
-- Ready-to-deploy Render blueprint (`render.yaml`) and local CLI runner (`main.py`)
+## 🧠 Overview
 
-## Requirements
+AI Call Analyzer is a full-stack web application that leverages modern AI (LLMs) to analyze customer calls and extract actionable insights in real time.
 
-- Python 3.11.x
-- OpenAI API key with access to `gpt-4o-mini-transcribe` and `gpt-5.4`
+It is designed as a lightweight, flexible alternative to traditional contact center analytics platforms such as Verint, NICE, and Genesys.
 
-## Local Development
+---
 
-```bash
-python -m venv .venv
-.venv\Scripts\activate        # or source .venv/bin/activate on macOS/Linux
-pip install -r requirements.txt
-set OPENAI_API_KEY=sk-...      # use export on macOS/Linux
-uvicorn api:app --reload --host 0.0.0.0 --port 8000
-```
+## ✨ Key Features
 
-Visit <http://localhost:8000> and use the UI. For CLI-only runs:
+- 🎙️ Audio transcription (OpenAI Whisper)
+- 🧾 AI-generated call summaries
+- 🎯 Customer intent detection
+- 😊 Sentiment analysis
+- ⚠️ Retention risk scoring
+- 📊 QA scoring
+- 🧠 Coaching recommendations
+- 🚀 Next-best-action generation
+- 📁 JSON export for reporting
 
-```bash
-python main.py sample_call.txt   # or pass an audio file path
-```
+---
 
-Outputs land in `analysis_report.json` (structured results) and `transcript_output.txt` when the input was audio.
+## 🖥️ Demo
 
-## Deploying on Render
+Try it live:
+👉 https://ai-call-analyzer-cj4s.onrender.com/
 
-1. Push this repo to GitHub.
-2. Either:
-   - Use **New → Blueprint** in Render and point it at `render.yaml`, or
-   - Create a Web Service manually, set the build command to `pip install -r requirements.txt`, and the start command to `uvicorn api:app --host 0.0.0.0 --port $PORT`.
-3. Add `OPENAI_API_KEY` under the service’s **Environment** tab.
-4. Trigger a deploy (or enable auto-deploy).
+Upload an audio file or paste a transcript to see AI-generated insights instantly.
 
-## Project Layout
+---
 
-```
-├── api.py              # FastAPI HTTP interface + static UI serving
-├── main.py             # CLI helpers: transcription + analysis pipeline
-├── static/             # index.html + Styles.css for the front-end
-├── sample_call.txt     # Starter transcript for demos/tests
-├── render.yaml         # Render blueprint for painless deploys
-├── requirements.txt    # Runtime dependencies
-├── pyproject.toml      # Project metadata (Python 3.11)
-└── README.md
-```
+## 🛠️ Tech Stack
 
-## Environment Variables
+- **Backend:** FastAPI (Python)
+- **AI:** OpenAI API (GPT + Whisper)
+- **Frontend:** HTML, CSS, JavaScript
+- **Deployment:** Render
+- **File Handling:** Temp file processing + JSON outputs
 
-| Name | Purpose |
-| --- | --- |
-| `OPENAI_API_KEY` | Required. Used by both CLI + FastAPI routes to call OpenAI APIs. |
+---
 
-## Next Ideas
+## 🧩 Architecture
 
-- Persist past analyses for download/history
-- Add auth or simple rate limiting before sharing publicly
-- Swap in smaller/cheaper models for low-stakes demo environments
+User Input (Audio / Text)
+        ↓
+Transcription (if audio)
+        ↓
+LLM Analysis (OpenAI)
+        ↓
+Structured JSON Output
+        ↓
+Frontend Dashboard Rendering
 
-Feel free to extend and keep shipping! 🤠
+## 💡 Why This Matters
+
+Traditional call analytics platforms are powerful but often rigid, expensive, and slow to adapt.
+
+This project demonstrates how modern AI can:
+
+- Deliver real-time insights
+- Provide flexible scoring models
+- Reduce dependency on legacy systems
+- Enable rapid customization for business needs
+
+---
+
+## 🔮 Future Enhancements
+
+- Multi-call dashboard and trend analysis
+- User authentication and report history
+- CSV/PDF export
+- Real-time streaming transcription
+- Configurable QA scoring models
+
+---
+
+## 👤 Author
+
+Brian Snyder  
+Voice Implementation / Contact Center Technology  
+Exploring AI-driven CX solutions  
+
+---
+
+## ⭐ If you like this project
+
+Give it a star ⭐ or connect with me on LinkedIn!
