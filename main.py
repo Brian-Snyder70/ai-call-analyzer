@@ -109,6 +109,9 @@ Transcript:
                         },
                         "escalation_flag": {
                             "type": "boolean"
+                        },
+                        "next_best_action": {
+                            "type": "string"
                         }
                     },
                     "required": [
@@ -120,7 +123,8 @@ Transcript:
                         "retention_risk",
                         "qa_score",
                         "call_disposition",
-                        "escalation_flag"
+                        "escalation_flag",
+                        "next_best_action"
                     ]
                 },
                 "strict": True

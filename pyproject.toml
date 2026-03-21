@@ -1,9 +1,9 @@
 [project]
 name = "ai-call-analyzer"
 version = "0.1.0"
-description = "Add your description here"
+description = "AI call QA analyzer demo"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.11,<3.12"
 dependencies = [
     "fastapi>=0.135.1",
     "openai>=2.29.0",
