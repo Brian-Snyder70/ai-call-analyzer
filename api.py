@@ -52,6 +52,7 @@ async def analyze_audio(file: UploadFile = File(...)):
         raise HTTPException(status_code=400, detail="No file uploaded")
 
     ext = Path(file.filename).suffix.lower()
+
     if ext not in [".wav", ".mp3", ".m4a", ".webm"]:
         raise HTTPException(status_code=400, detail="Unsupported audio file type")
 
