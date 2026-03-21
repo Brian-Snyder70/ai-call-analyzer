@@ -28,7 +28,7 @@
         <h2>Analyze Audio</h2>
         <input type="file" id="audioInput" accept=".wav,.mp3,.m4a,.webm">
         <button id="audioBtn">Analyze Audio</button>
-        <button onclick="loadSample()">Load Sample</button>
+        <!--<button onclick="loadSample()">Load Sample</button>-->
       </section>
     </div>
 
@@ -101,7 +101,14 @@
   <footer>© Brian Snyder 2026</footer>
 
   <script>
-    const sampleTranscript = `Agent: Thank you for calling support. How can I help today?\nCustomer: My bill increased this month and I want to understand why.\nAgent: Let me check your account details.\nCustomer: If this keeps happening I may need to change plans.`;
+    const sampleTranscript = `Agent: Thank you for calling Astound Broadband. How can I help you today?
+Customer: My internet has been dropping all week and it's really frustrating.
+Agent: I'm sorry to hear that. Let me run a quick diagnostic on your line.
+Customer: I work from home so this is becoming a big issue.
+Agent: I understand. I see some instability—I'll reset your connection and schedule a technician if needed.
+Customer: Okay, thank you.
+Agent: You're welcome. Is there anything else I can help with?
+Customer: No, that’s it.`;
 
     const state = {
       transcript: null,
