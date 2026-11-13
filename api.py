@@ -1,4 +1,5 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi.concurrency import run_in_threadpool
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pathlib import Path
@@ -10,6 +11,10 @@ from main import transcribe_audio, analyze_transcript
 
 BASE_DIR = Path(__file__).resolve().parent
 STATIC_DIR = BASE_DIR / "static"
+
+# OpenAI's transcription endpoint rejects audio files larger than 25 MB.
+MAX_UPLOAD_BYTES = 25 * 1024 * 1024
+UPLOAD_CHUNK_BYTES = 1024 * 1024
 
 app = FastAPI(title="AI Call Analyzer UI")
 
@@ -35,7 +40,9 @@ async def analyze_text(payload: dict):
         raise HTTPException(status_code=400, detail="Missing transcript")
 
     try:
-        report = json.loads(analyze_transcript(transcript))
+        # The OpenAI client is synchronous; run it in a worker thread so a
+        # slow request doesn't block every other request on the server.
+        report = json.loads(await run_in_threadpool(analyze_transcript, transcript))
         return {
             "transcript": transcript,
             "analysis": report
@@ -56,15 +63,33 @@ async def analyze_audio(file: UploadFile = File(...)):
     if ext not in [".wav", ".mp3", ".m4a", ".webm"]:
         raise HTTPException(status_code=400, detail="Unsupported audio file type")
 
+    too_large = HTTPException(
+        status_code=413,
+        detail=f"Audio file is too large. Maximum size is {MAX_UPLOAD_BYTES // (1024 * 1024)} MB.",
+    )
+
+    if file.size is not None and file.size > MAX_UPLOAD_BYTES:
+        raise too_large
+
     temp_path = None
 
     try:
+        # Copy the upload to disk in chunks instead of loading it all into
+        # memory, and stop as soon as it goes over the limit.
         with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as temp_file:
-            temp_file.write(await file.read())
             temp_path = temp_file.name
+            written = 0
+            while chunk := await file.read(UPLOAD_CHUNK_BYTES):
+                written += len(chunk)
+                if written > MAX_UPLOAD_BYTES:
+                    raise too_large
+                temp_file.write(chunk)
 
-        transcript = transcribe_audio(temp_path)
-        report = json.loads(analyze_transcript(transcript))
+        if written == 0:
+            raise HTTPException(status_code=400, detail="Uploaded file is empty")
+
+        transcript = await run_in_threadpool(transcribe_audio, temp_path)
+        report = json.loads(await run_in_threadpool(analyze_transcript, transcript))
 
         return {
             "filename": file.filename,
@@ -72,6 +97,8 @@ async def analyze_audio(file: UploadFile = File(...)):
             "analysis": report
         }
 
+    except HTTPException:
+        raise
     except json.JSONDecodeError:
         raise HTTPException(status_code=500, detail="Model returned invalid JSON")
     except Exception as e:
